@@ -1,0 +1,8 @@
+parameters:
+    level: 5
+    paths:
+        - src
+        - tests
+    checkUninitializedProperties: true
+    inferPrivatePropertyTypeFromConstructor: true
+    reportUnmatchedIgnoredErrors: false

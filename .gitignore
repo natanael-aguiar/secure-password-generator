@@ -1,4 +1,13 @@
 vendor/*
 .idea/*
+.vscode/*
 .phpunit.cache
 .phpunit.result.cache
+/phpstan-result.cache
+/coverage/
+*.log
+*.bak
+*.swp
+*.swo
+*~
+*.cache
