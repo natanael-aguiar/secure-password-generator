@@ -1,15 +1,20 @@
 # Secure Password Generator PHP Package
 
-This PHP package allows you to generate secure passwords with configurable options, including uppercase letters, lowercase letters, numbers and special characters.
-## Installation
+[![CI](https://github.com/natanael-aguiar/secure-password-generator/actions/workflows/ci.yml/badge.svg)](https://github.com/natanael-aguiar/secure-password-generator/actions/workflows/ci.yml)
+[![Packagist](https://img.shields.io/packagist/v/natanael-aguiar/secure-password-generator)](https://packagist.org/packages/natanael-aguiar/secure-password-generator)
+[![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](LICENSE)
 
-You can install this package using Composer. Run the following command in the terminal:
+This PHP package allows you to generate secure passwords with configurable options, including uppercase letters, lowercase letters, numbers and special characters.
+
+## Instalação
+
+Você pode instalar este pacote usando o Composer:
 
 ```bash
-composer require natanael-oliveira/secure-password-generator
+composer require natanael-aguiar/secure-password-generator
 ```
 
-## Use
+## Uso
 
 ```php
 <?php
@@ -34,18 +39,41 @@ try {
 }
 ```
 
-## Documentation
+## Documentação
 
-### `SecurePasswordGenerator` (Main Class)
+### `SecurePasswordGenerator` (Classe Principal)
 
-#### Methods
+#### Métodos
 
-- `allowLowercase(bool $allow): void` - Enables or disables lowercase letters in the password.
-- `allowUppercase(bool $allow): void` - Enables or disables uppercase letters in the password.
-- `allowNumbers(bool $allow): void` - Enables or disables numbers in the password.
-- `allowSpecialCharacters(bool $allow): void` - Enables or disables special characters in the password.
-- `generatePassword(int $length = 12): string` - Generates a secure password with the specified length.
+-   `allowLowercase(bool $allow): void` - Habilita ou desabilita letras minúsculas na senha.
+-   `allowUppercase(bool $allow): void` - Habilita ou desabilita letras maiúsculas na senha.
+-   `allowNumbers(bool $allow): void` - Habilita ou desabilita números na senha.
+-   `allowSpecialCharacters(bool $allow): void` - Habilita ou desabilita caracteres especiais na senha.
+-   `generatePassword(int $length = 12): string` - Gera uma senha segura com o comprimento especificado.
 
-## Contribution
+## Como Contribuir
 
-Contributions are welcome! Please open an issue or send a pull request if you want to contribute.
+Veja o arquivo [CONTRIBUTING.md](CONTRIBUTING.md) para detalhes sobre o processo de contribuição.
+
+## Código de Conduta
+
+Este projeto adota o [Código de Conduta do Contributor Covenant](CODE_OF_CONDUCT.md).
+
+## Execução de Testes, Lint e Análise Estática
+
+-   **Testes:**
+    ```bash
+    vendor/bin/phpunit
+    ```
+-   **Lint (PSR-12):**
+    ```bash
+    vendor/bin/php-cs-fixer fix --dry-run --diff
+    ```
+-   **Análise Estática:**
+    ```bash
+    vendor/bin/phpstan analyse
+    ```
+
+## Contribuição
+
+Contribuições são bem-vindas! Por favor, abra uma issue ou envie um pull request se você quiser contribuir.

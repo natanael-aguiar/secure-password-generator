@@ -2,12 +2,13 @@
 
 namespace SecurePasswordGenerator;
 
+use InvalidArgumentException;
 use Exception;
 
 /**
- * Class to generate secure passwords.
+ * Classe para geração de senhas seguras.
  *
- * This class allows you to generate random passwords using different character sets.
+ * Permite gerar senhas aleatórias utilizando diferentes conjuntos de caracteres.
  *
  * @package SecurePasswordGenerator
  */
@@ -24,79 +25,105 @@ class SecurePasswordGenerator
     private bool $useSpecialCharacters = true;
 
     /**
-     * Allows the use of lowercase characters in the generated password.
+     * Permite o uso de caracteres minúsculos na senha gerada.
      *
-     * @param bool $allow If true, lowercase characters will be used.
+     * @param bool $allow Se true, caracteres minúsculos serão usados.
+     * @return $this
      */
-    public function allowLowercase(bool $allow): void
+    public function allowLowercase(bool $allow): self
     {
         $this->useLowercase = $allow;
+        return $this;
     }
 
     /**
-     * Allows the use of uppercase characters in the generated password.
+     * Permite o uso de caracteres maiúsculos na senha gerada.
      *
-     * @param bool $allow If true, uppercase characters will be used.
+     * @param bool $allow Se true, caracteres maiúsculos serão usados.
+     * @return $this
      */
-    public function allowUppercase(bool $allow): void
+    public function allowUppercase(bool $allow): self
     {
         $this->useUppercase = $allow;
+        return $this;
     }
 
     /**
-     * Allows the use of numbers in the generated password.
+     * Permite o uso de números na senha gerada.
      *
-     * @param bool $allow If true, numbers will be used.
+     * @param bool $allow Se true, números serão usados.
+     * @return $this
      */
-    public function allowNumbers(bool $allow): void
+    public function allowNumbers(bool $allow): self
     {
         $this->useNumbers = $allow;
+        return $this;
     }
 
     /**
-     * Allows the use of special characters in the generated password.
+     * Permite o uso de caracteres especiais na senha gerada.
      *
-     * @param bool $allow If true, special characters will be used.
+     * @param bool $allow Se true, caracteres especiais serão usados.
+     * @return $this
      */
-    public function allowSpecialCharacters(bool $allow): void
+    public function allowSpecialCharacters(bool $allow): self
     {
         $this->useSpecialCharacters = $allow;
+        return $this;
     }
 
     /**
-     * Generates a random password based on the allowed character sets.
+     * Gera uma senha aleatória baseada nos conjuntos de caracteres permitidos.
      *
-     * @param int $length The length of the generated password (default: 12).
-     * @return string The generated password.
-     * @throws Exception If no character set is selected to generate the password.
+     * @param int $length Comprimento da senha (mínimo: 4, padrão: 12).
+     * @return string Senha gerada.
+     * @throws InvalidArgumentException Se o comprimento for inválido.
+     * @throws Exception Se nenhum conjunto de caracteres estiver habilitado.
      */
     public function generatePassword(int $length = 12): string
     {
+        if ($length < 4) {
+            throw new InvalidArgumentException('O comprimento mínimo da senha é 4.');
+        }
+
         $characters = '';
+        $charSets = [];
         if ($this->useLowercase) {
             $characters .= self::LOWERCASE;
+            $charSets[] = self::LOWERCASE;
         }
         if ($this->useUppercase) {
             $characters .= self::UPPERCASE;
+            $charSets[] = self::UPPERCASE;
         }
         if ($this->useNumbers) {
             $characters .= self::NUMBERS;
+            $charSets[] = self::NUMBERS;
         }
         if ($this->useSpecialCharacters) {
             $characters .= self::SPECIAL_CHARACTERS;
+            $charSets[] = self::SPECIAL_CHARACTERS;
         }
 
         if (empty($characters)) {
-            throw new Exception("No character set was specified to generate the password. Please enable at least one character set (lowercase, uppercase, numbers or special characters) before trying to generate the password.");
+            throw new Exception("Nenhum conjunto de caracteres foi especificado para gerar a senha. Habilite ao menos um conjunto (minúsculas, maiúsculas, números ou especiais).");
         }
 
         $password = '';
         $characterSetLength = strlen($characters);
 
-        for ($i = 0; $i < $length; $i++) {
-            $randomChar = $characters[random_int(0, $characterSetLength - 1)];
-            $password .= $randomChar;
+        // Garante pelo menos um caractere de cada conjunto habilitado
+        foreach ($charSets as $set) {
+            $password .= $set[random_int(0, strlen($set) - 1)];
         }
+
+        // Preenche o restante da senha
+        for ($i = strlen($password); $i < $length; $i++) {
+            $password .= $characters[random_int(0, $characterSetLength - 1)];
+        }
+
+        // Embaralha para não deixar os primeiros caracteres previsíveis
+        $password = str_shuffle($password);
 
         return $password;
     }
