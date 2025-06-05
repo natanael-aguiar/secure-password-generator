@@ -1,4 +1,4 @@
-# Código de Conduta
+# Code of Conduct
 
-Todos os participantes deste projeto devem aderir ao [Código de Conduta do Contributor Covenant](https://www.contributor-covenant.org/pt-br/version/2/0/code_of_conduct/).
+All participants in this project must adhere to the [Contributor Covenant Code of Conduct](https://www.contributor-covenant.org/version/2/0/code_of_conduct/).
 

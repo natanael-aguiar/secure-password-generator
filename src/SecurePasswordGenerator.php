@@ -6,9 +6,9 @@ use InvalidArgumentException;
 use Exception;
 
 /**
- * Classe para geração de senhas seguras.
+ * Class for generating secure passwords.
  *
- * Permite gerar senhas aleatórias utilizando diferentes conjuntos de caracteres.
+ * Allows generating random passwords using different character sets.
  *
  * @package SecurePasswordGenerator
  */
@@ -25,9 +25,9 @@ class SecurePasswordGenerator
     private bool $useSpecialCharacters = true;
 
     /**
-     * Permite o uso de caracteres minúsculos na senha gerada.
+     * Allows the use of lowercase characters in the generated password.
      *
-     * @param bool $allow Se true, caracteres minúsculos serão usados.
+     * @param bool $allow If true, lowercase characters will be used.
      * @return $this
      */
     public function allowLowercase(bool $allow): self
@@ -37,9 +37,9 @@ class SecurePasswordGenerator
     }
 
     /**
-     * Permite o uso de caracteres maiúsculos na senha gerada.
+     * Allows the use of uppercase characters in the generated password.
      *
-     * @param bool $allow Se true, caracteres maiúsculos serão usados.
+     * @param bool $allow If true, uppercase characters will be used.
      * @return $this
      */
     public function allowUppercase(bool $allow): self
@@ -49,9 +49,9 @@ class SecurePasswordGenerator
     }
 
     /**
-     * Permite o uso de números na senha gerada.
+     * Allows the use of numbers in the generated password.
      *
-     * @param bool $allow Se true, números serão usados.
+     * @param bool $allow If true, numbers will be used.
      * @return $this
      */
     public function allowNumbers(bool $allow): self
@@ -61,9 +61,9 @@ class SecurePasswordGenerator
     }
 
     /**
-     * Permite o uso de caracteres especiais na senha gerada.
+     * Allows the use of special characters in the generated password.
      *
-     * @param bool $allow Se true, caracteres especiais serão usados.
+     * @param bool $allow If true, special characters will be used.
      * @return $this
      */
     public function allowSpecialCharacters(bool $allow): self
@@ -73,17 +73,17 @@ class SecurePasswordGenerator
     }
 
     /**
-     * Gera uma senha aleatória baseada nos conjuntos de caracteres permitidos.
+     * Generates a random password based on the allowed character sets.
      *
-     * @param int $length Comprimento da senha (mínimo: 4, padrão: 12).
-     * @return string Senha gerada.
-     * @throws InvalidArgumentException Se o comprimento for inválido.
-     * @throws Exception Se nenhum conjunto de caracteres estiver habilitado.
+     * @param int $length Password length (minimum: 4, default: 12).
+     * @return string Generated password.
+     * @throws InvalidArgumentException If the length is invalid.
+     * @throws Exception If no character set is enabled.
      */
     public function generatePassword(int $length = 12): string
     {
         if ($length < 4) {
-            throw new InvalidArgumentException('O comprimento mínimo da senha é 4.');
+            throw new InvalidArgumentException('The minimum password length is 4.');
         }
 
         $characters = '';
@@ -106,23 +106,23 @@ class SecurePasswordGenerator
         }
 
         if (empty($characters)) {
-            throw new Exception("Nenhum conjunto de caracteres foi especificado para gerar a senha. Habilite ao menos um conjunto (minúsculas, maiúsculas, números ou especiais).");
+            throw new Exception("No character set was specified to generate the password. Please enable at least one set (lowercase, uppercase, numbers or special characters).");
         }
 
         $password = '';
         $characterSetLength = strlen($characters);
 
-        // Garante pelo menos um caractere de cada conjunto habilitado
+        // Ensure at least one character from each enabled set
         foreach ($charSets as $set) {
             $password .= $set[random_int(0, strlen($set) - 1)];
         }
 
-        // Preenche o restante da senha
+        // Fill the rest of the password
         for ($i = strlen($password); $i < $length; $i++) {
             $password .= $characters[random_int(0, $characterSetLength - 1)];
         }
 
-        // Embaralha para não deixar os primeiros caracteres previsíveis
+        // Shuffle to avoid predictable first characters
         $password = str_shuffle($password);
 
         return $password;
