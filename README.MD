@@ -4,17 +4,17 @@
 [![Packagist](https://img.shields.io/packagist/v/natanael-aguiar/secure-password-generator)](https://packagist.org/packages/natanael-aguiar/secure-password-generator)
 [![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](LICENSE)
 
-This PHP package allows you to generate secure passwords with configurable options, including uppercase letters, lowercase letters, numbers and special characters.
+This PHP package allows you to generate secure passwords with configurable options, including uppercase letters, lowercase letters, numbers, and special characters.
 
-## Instalação
+## Installation
 
-Você pode instalar este pacote usando o Composer:
+You can install this package using Composer:
 
 ```bash
 composer require natanael-aguiar/secure-password-generator
 ```
 
-## Uso
+## Usage
 
 ```php
 <?php
@@ -39,41 +39,42 @@ try {
 }
 ```
 
-## Documentação
+## Documentation
 
-### `SecurePasswordGenerator` (Classe Principal)
+### `SecurePasswordGenerator` (Main Class)
 
-#### Métodos
+#### Methods
 
--   `allowLowercase(bool $allow): void` - Habilita ou desabilita letras minúsculas na senha.
--   `allowUppercase(bool $allow): void` - Habilita ou desabilita letras maiúsculas na senha.
--   `allowNumbers(bool $allow): void` - Habilita ou desabilita números na senha.
--   `allowSpecialCharacters(bool $allow): void` - Habilita ou desabilita caracteres especiais na senha.
--   `generatePassword(int $length = 12): string` - Gera uma senha segura com o comprimento especificado.
+-   `allowLowercase(bool $allow): void` - Enables or disables lowercase letters in the password.
+-   `allowUppercase(bool $allow): void` - Enables or disables uppercase letters in the password.
+-   `allowNumbers(bool $allow): void` - Enables or disables numbers in the password.
+-   `allowSpecialCharacters(bool $allow): void` - Enables or disables special characters in the password.
+-   `generatePassword(int $length = 12): string` - Generates a secure password with the specified length.
 
-## Como Contribuir
+## Contributing
 
-Veja o arquivo [CONTRIBUTING.md](CONTRIBUTING.md) para detalhes sobre o processo de contribuição.
+See the [CONTRIBUTING.md](CONTRIBUTING.md) file for details on the contribution process.
 
-## Código de Conduta
+## Code of Conduct
 
-Este projeto adota o [Código de Conduta do Contributor Covenant](CODE_OF_CONDUCT.md).
+This project adopts the [Contributor Covenant Code of Conduct](CODE_OF_CONDUCT.md).
 
-## Execução de Testes, Lint e Análise Estática
+## Running Tests, Lint, and Static Analysis
 
--   **Testes:**
+-   **Tests:**
     ```bash
     vendor/bin/phpunit
     ```
 -   **Lint (PSR-12):**
     ```bash
-    vendor/bin/php-cs-fixer fix --dry-run --diff
+    vendor/bin/php-cs-fixer fix --dry-run --diff --allow-risky=yes
     ```
--   **Análise Estática:**
+-   **Static Analysis:**
     ```bash
     vendor/bin/phpstan analyse
     ```
 
-## Contribuição
+## Contribution
 
-Contribuições são bem-vindas! Por favor, abra uma issue ou envie um pull request se você quiser contribuir.
+Contributions are welcome! Please open an issue or submit a pull request if you want to contribute.
+
