@@ -63,4 +63,15 @@ class SecurePasswordGeneratorTest extends TestCase
         $password = $generator->generatePassword(8);
         $this->assertMatchesRegularExpression('/^[!@#$%^&*()\-_+=<>?]+$/', $password);
     }
+
+    public function testMultiplePasswordsAreDifferent(): void
+    {
+        $generator = new SecurePasswordGenerator();
+        $passwords = [];
+        for ($i = 0; $i < 100; $i++) {
+            $passwords[] = $generator->generatePassword(12);
+        }
+        $uniquePasswords = array_unique($passwords);
+        $this->assertEquals(count($passwords), count($uniquePasswords));
+    }
 }
