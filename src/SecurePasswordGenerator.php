@@ -123,8 +123,32 @@ class SecurePasswordGenerator
         }
 
         // Shuffle to avoid predictable first characters
-        $password = str_shuffle($password);
+        $password = $this->secureShuffle($password);
 
         return $password;
+    }
+
+    /**
+     * Shuffles a string using a cryptographically secure random number generator.
+     *
+     * @param string $string The string to shuffle.
+     * @return string The shuffled string.
+     */
+    private function secureShuffle(string $string): string
+    {
+        $length = strlen($string);
+        if ($length <= 1) {
+            return $string;
+        }
+
+        $array = str_split($string);
+        for ($i = $length - 1; $i > 0; $i--) {
+            $j = random_int(0, $i);
+            $temp = $array[$i];
+            $array[$i] = $array[$j];
+            $array[$j] = $temp;
+        }
+
+        return implode('', $array);
     }
 }
